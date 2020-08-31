@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PortfolioService {
-    public void convertPortfolio(Map<String, String> cryptoCoins){
+
+    public void convertPortfolio(Map<String, String> cryptoCoins) {
         Map<String, BigDecimal> portfolioEurValue = new HashMap<>();
         ForexService forexService = new ForexService();
         for (Map.Entry<String, String> entry : cryptoCoins.entrySet()) {
@@ -19,6 +20,7 @@ public class PortfolioService {
         });
 
         BigDecimal total = portfolioEurValue.values().stream().reduce(BigDecimal.ZERO, BigDecimal::add);
-        System.out.println( " Total : " + total.toPlainString());
+        System.out.println( "Total : " + total.toPlainString());
     }
+
 }
