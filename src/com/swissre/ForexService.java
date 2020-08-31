@@ -7,24 +7,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ForexService {
-    public BigDecimal convert() {
+    public BigDecimal convert(String fsym, String tsym) {
         try {
-            URL url = new URL("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=EUR");
+            final String urlString = "https://min-api.cryptocompare.com/data/price?fsym="+fsym+"&tsyms="+tsym;
+            URL url = new URL(urlString);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
             if (conn.getResponseCode() != 200) {
-                throw new RuntimeException("Failed : HTTP Error code : "
-                        + conn.getResponseCode());
+                throw new RuntimeException("Failed : HTTP Error code : " + conn.getResponseCode());
             }
             InputStreamReader in = new InputStreamReader(conn.getInputStream());
             BufferedReader br = new BufferedReader(in);
             String output;
             while ((output = br.readLine()) != null) {
-
                 final String[] splitted = output.replaceAll("}", "").split(":");
-                System.out.println(splitted[1]);
-                return new BigDecimal(String.valueOf(BigDecimal.ZERO));
+                return new BigDecimal(String.valueOf(splitted[1]));
             }
             conn.disconnect();
 
