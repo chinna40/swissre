@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-
         try {
             final URI uri = ClassLoader.getSystemResource("bobs_crypto.txt").toURI();
             final Map<String, String> cryptoCoins = Files.lines(Paths.get(uri)).map(s -> s.split("=", 2))
@@ -22,9 +21,5 @@ public class Main {
         } catch (URISyntaxException | IOException ex) {
             ex.printStackTrace();
         }
-
-
     }
-
-
 }

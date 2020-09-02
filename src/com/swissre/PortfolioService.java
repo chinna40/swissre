@@ -22,5 +22,4 @@ public class PortfolioService {
         BigDecimal total = portfolioEurValue.values().stream().reduce(BigDecimal.ZERO, BigDecimal::add);
         System.out.println( "Total : " + total.toPlainString());
     }
-
 }
